@@ -14,6 +14,7 @@ def index():
 @app.route("/submit", methods=["POST"])
 def submit():
     name = request.form["name"]
+    condition = request.form["condition"]
     date = datetime.datetime.now()
     q1 = request.form["q1"]
     q2 = request.form["q2"]
@@ -32,11 +33,9 @@ def submit():
         + q_list[4] * 5
         + q_list[5] * 6
     ) / 21
-
     with open("nasa_tlx_result.csv", "a", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow([date, name, awwl, q1, q2, q3, q4, q5, q6])
-
+        writer.writerow([date, name, condition, awwl, q1, q2, q3, q4, q5, q6])
     return redirect("/")
 
 
